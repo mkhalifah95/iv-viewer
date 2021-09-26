@@ -680,11 +680,12 @@ class ImageViewer {
   }
 
   _calculateDimensions () {
-    const { image, container, snapView, snapImage, zoomHandle } = this._elements;
+    const { image, container, snapView, snapImage, zoomHandle, domElement } = this._elements;
 
     // calculate content width of image and snap image
-    const imageWidth = parseInt(css(image, 'width'), 10);
-    const imageHeight = parseInt(css(image, 'height'), 10);
+    // take the original unresized image dimensions to avoid 0x0 size on smaller viewports
+    const imageWidth = domElement.naturalWidth;
+    const imageHeight = domElement.naturalHeight;
 
     const contWidth = parseInt(css(container, 'width'), 10);
     const contHeight = parseInt(css(container, 'height'), 10);
